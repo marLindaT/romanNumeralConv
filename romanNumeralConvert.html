@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CanvasDrawingApp</title>
+	
+	</head>
+<body>
+
+
+<input id="input" placeholder ="enter your number here">
+<input id="result" placeholder="result">
+<button id ="btn">Show Me Roman Numerals</button>
+
+<script type="text/javascript">
+
+
+const input = document.querySelector("#input");
+const result = document.querySelector("#result");
+const btn = document.querySelector("#btn");
+
+
+const getInput = function (){
+
+//add error handling here
+
+	let x = input.value;
+	return x;
+};
+
+const convertInput= function (a){
+
+	let num ={};
+	let rem ;
+	
+	if(Math.floor(a/1000>=1)){
+		num.thousands = Math.floor(a/1000);
+		rem = a%1000;
+		a = rem;
+	}
+	if(Math.floor(a/100>=1)){
+		num.hundreds = Math.floor(a/100);
+		rem = a%100;
+		a=rem;
+	}
+	if(Math.floor(a/50>=1)){
+		num.fifties = Math.floor(a/50);
+		rem = a%50;
+		a=rem;
+	}
+	if(Math.floor(a/10>=1)){
+	num.tens = Math.floor(a/10);
+	rem = a%10;
+	a=rem;
+	}
+	if(Math.floor(a/5>=1)){
+	num.fives = Math.floor(a/5);
+	rem = a%5;
+	a=rem;
+	}
+	if(Math.floor(a/1>=1)){
+	num.ones = Math.floor(a/1);
+	rem = a%1;
+	a=rem;
+	}
+	
+	return num;
+};
+
+const displayResult = function(obj){
+
+	let ans =[];
+
+	if(obj.thousands){
+		for(let i= 0; i<obj.thousands;i++){
+			ans.push("M");
+		}
+	}
+	if(obj.hundreds){
+	for(let i= 0; i<obj.hundreds;i++){
+	ans.push("C");
+	}
+	}
+	if(obj.fifties){
+	for(let i= 0; i<obj.fifties;i++){
+	ans.push("L");
+	}
+	}
+	if(obj.tens){
+	for(let i= 0; i<obj.tens;i++){
+	ans.push("X");
+	}
+	}
+	if(obj.fives){
+	for(let i= 0; i<obj.fives;i++){
+	ans.push("V");
+	}
+	}
+	if(obj.ones){
+	for(let i= 0; i<obj.ones;i++){
+	ans.push("I");
+	}
+	}
+	
+	
+	
+	
+result.value = ans.join("");
+
+};
+
+
+
+const run= function(){
+
+	displayResult(convertInput(getInput()));
+};
+
+btn.addEventListener("click", run, false);
+</script>
+
+</body>
+</html>
